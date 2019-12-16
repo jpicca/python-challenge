@@ -24,20 +24,32 @@ with open(fname, 'r') as csvfile:
             
             candidateTracker[row[2]] = 1
 
-percentages = []
 mostVotes = 0
 
 totalVotes = sum(candidateTracker.values())
 
-# Loop through candidates in the dictionary
+toPrint = f'Election Results\n' \
+            f'-------------------------\n' \
+            f'Total Votes: {totalVotes}\n' \
+            f'-------------------------\n'
+
 for i in candidateTracker:
-
-    # Add their percentages to a list
-    percentages.append(candidateTracker[i]/totalVotes)
-
-    # Find the winner
+    
+    toPrint += f'{i}: {candidateTracker[i]/totalVotes:.3%} ({candidateTracker[i]})\n'
+    
     if candidateTracker[i] > mostVotes:
         winner = i
         mostVotes = candidateTracker[i]
+        
+toPrint += f'-------------------------\n' \
+            f'Winner: {winner}\n' \
+            f'-------------------------' 
 
-print(winner)
+print(toPrint)
+
+# Write information to a txt file
+output = './electionresults.txt'
+
+with open(output, 'w', newline='') as file:
+
+    file.write(toPrint)
