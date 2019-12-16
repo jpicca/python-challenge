@@ -22,9 +22,11 @@ with open(fname, 'r') as csvfile:
             
             if change > largestIncrease:
                 largestIncrease = change
+                monthOfIncrease = row[0]
 
             if change < largestDecrease:
                 largestDecrease = change
+                monthOfDecrease = row[0]
             
         #print(int(row[1]) > largestProfit)
         #Before next iteration, save current iteration's revenue to "old row" so we can calculate change
@@ -35,12 +37,22 @@ with open(fname, 'r') as csvfile:
     # Subtract 1 from monthCount to get the number of changes
     avgChange = totalChange / (monthCount - 1)
 
+toPrint = f'Financial Analysis\n' \
+    f'------------------\n' \
+    f'Total Months: {monthCount}\n' \
+    f'Total: ${revenue}\n' \
+    f'Average Change: ${avgChange:.2f}\n' \
+    f'Greatest Increase in Profits: {monthOfIncrease} (${largestIncrease})\n' \
+    f'Greatest Decrease in Profits: {monthOfDecrease} (${largestDecrease})\n' 
+
+
+print(toPrint)
 
 # Printing to Terminal
-print('Financial Analysis')
+print('Financial Analysis\n')
 print('------------------')
 print(f'Total Months: {monthCount}')
 print(f'Total: ${revenue}')
 print(f'Average Change: ${avgChange:.2f}')
-print(f'Greatest Increase in Profits: ${largestIncrease}')
-print(f'Greatest Decrease in Profits: ${largestDecrease}')
+print(f'Greatest Increase in Profits: {monthOfIncrease} (${largestIncrease})')
+print(f'Greatest Decrease in Profits: {monthOfDecrease} (${largestDecrease})')
