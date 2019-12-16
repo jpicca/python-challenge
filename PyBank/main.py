@@ -1,4 +1,3 @@
-import pandas as pd
 import csv
 
 # File to be read
